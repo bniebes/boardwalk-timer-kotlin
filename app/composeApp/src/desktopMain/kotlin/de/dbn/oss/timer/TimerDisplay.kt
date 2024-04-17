@@ -5,19 +5,16 @@ package de.dbn.oss.timer
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import de.dbn.oss.composables.CustomTooltipArea
+import de.dbn.oss.composables.*
 
 private val YELLOW_600 = Color(0xFFFBC02D)
 private val RED_600 = Color(0xFFE53935)
@@ -76,19 +73,13 @@ fun TimerDisplay(
                         additional.toInt()
                     )
                 }) {
-                Icon(painter = painterResource("timer_play.png"), contentDescription = "")
+                TimerStartIcon()
             }
-            IconButton(enabled = active, onClick = onClickPause) {
-                Icon(painter = painterResource("timer_pause.png"), contentDescription = "")
-            }
+            IconButton(enabled = active, onClick = onClickPause) { TimerPauseIcon() }
             IconButton(enabled = active, onClick = onClickNext) {
-                BadgedBox(badge = { Badge { Text(peopleRemaining) } }) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowForward, "")
-                }
+                BadgedBox(badge = { Badge { Text(peopleRemaining) } }) { TimerNextIcon() }
             }
-            IconButton(onClick = onClickStop) {
-                Icon(painter = painterResource("timer_off.png"), contentDescription = "")
-            }
+            IconButton(onClick = onClickStop) { TimerStopIcon() }
         }
         Divider()
         Row(modifier = Modifier.padding(5.dp, 0.dp)) {
