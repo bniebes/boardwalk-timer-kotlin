@@ -79,7 +79,7 @@ fun TimerDisplay(
             IconButton(enabled = active, onClick = onClickNext) {
                 BadgedBox(badge = { Badge { Text(peopleRemaining) } }) { TimerNextIcon() }
             }
-            IconButton(onClick = onClickStop) { TimerStopIcon() }
+            IconButton(enabled = active && !paused, onClick = onClickStop) { TimerStopIcon() }
         }
         Divider()
         Row(modifier = Modifier.padding(5.dp, 0.dp)) {
