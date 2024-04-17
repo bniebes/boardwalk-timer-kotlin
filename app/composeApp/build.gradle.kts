@@ -29,11 +29,11 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "de.dbn.oss.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "de.dbn.oss"
+            packageName = "Boardwalk-Timer"
             packageVersion = "1.0.0"
         }
     }

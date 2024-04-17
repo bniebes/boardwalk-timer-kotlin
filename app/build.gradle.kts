@@ -4,3 +4,6 @@ plugins {
     alias(libs.plugins.jetbrainsCompose) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
 }
+
+group = "de.dbn.oss"
+version = "0.0.1"
