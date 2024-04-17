@@ -31,6 +31,10 @@ compose.desktop {
     application {
         mainClass = "de.dbn.oss.MainKt"
 
+        buildTypes.release.proguard {
+            version.set("7.4.0")
+        }
+
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "Boardwalk-Timer"
