@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: Apache-2.0
+
+package de.dbn.oss
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
