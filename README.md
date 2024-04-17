@@ -1,2 +1,3 @@
-# boardwalk-timer
+# Boardwalk Timer [boardwalk-timer]
+
 Simple boardwalk timer
