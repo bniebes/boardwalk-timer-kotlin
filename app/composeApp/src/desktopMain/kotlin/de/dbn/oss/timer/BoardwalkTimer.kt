@@ -2,7 +2,10 @@
 
 package de.dbn.oss.timer
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -11,22 +14,21 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.rememberWindowState
-import de.dbn.oss.composables.CustomTooltipArea
 import java.awt.Dimension
 
-const val width = 280
-const val height = 240
+const val width = 300
+const val height = 250
 
 @Composable
 fun BoardwalkTimer(onCloseRequest: () -> Unit) {
-    var pinned by remember { mutableStateOf(true) }
+    var alwaysOnTop by remember { mutableStateOf(true) }
     val windowState = rememberWindowState(size = DpSize(width = width.dp, height = height.dp))
     var darkMode by mutableStateOf(true)
     val timer = remember { Timer() }
 
     Window(
         onCloseRequest = onCloseRequest,
-        alwaysOnTop = pinned,
+        alwaysOnTop = alwaysOnTop,
         title = "Boardwalk Timer",
         state = windowState,
     ) {
@@ -50,31 +52,26 @@ fun BoardwalkTimer(onCloseRequest: () -> Unit) {
                         onNumberInput = timer::set,
                     )
                     Divider()
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(selected = pinned, onClick = { pinned = !pinned })
-                            CustomTooltipArea(text = "Timer always on top") {
-                                Text("Pinned")
-                            }
-                        }
-                        Row(
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text("Light")
-                            Switch(checked = darkMode, onCheckedChange = { darkMode = !darkMode })
-                            Text("Dark")
-                        }
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        LabeledCheckbox(
+                            text = "Always on top",
+                            checked = alwaysOnTop,
+                            onCheckedChange = { alwaysOnTop = !alwaysOnTop })
+                        LabeledCheckbox(
+                            text = "Dark mode",
+                            checked = darkMode,
+                            onCheckedChange = { darkMode = !darkMode })
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun LabeledCheckbox(checked: Boolean, onCheckedChange: (Boolean) -> Unit, text: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Checkbox(checked = checked, onCheckedChange = onCheckedChange)
+        Text(text)
     }
 }
